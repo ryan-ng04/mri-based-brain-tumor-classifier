@@ -1,126 +1,114 @@
 # mri-based-brain-tumor-classifier
 MRI-Based Brain Tumor Classification Using Convolutional Neural Networks and KNN algorithm
 
-📋 Overview
-This project explores the classification of brain tumors using two machine learning approaches: Convolutional Neural Networks (CNNs) and k-Nearest Neighbors (KNN). The primary objective is to support medical professionals by providing automated, accurate classification of brain tumors to improve diagnostic efficiency and treatment planning.
+## 📌 Overview
 
-The models are trained on a combined dataset of ~7,000 MRI brain scans and classify images into one of four tumor types:
+This project classifies brain tumors in MRI images using two models:
 
-Glioma
+- 🧠 **Convolutional Neural Network (CNN)**
+- 🔍 **k-Nearest Neighbors (k-NN)**
 
-Meningioma
+The goal is to support medical professionals in diagnosing brain tumors more efficiently and accurately. The models were trained on a dataset of ~7,000 MRI scans labeled into four categories:
+- Glioma
+- Meningioma
+- Pituitary Tumor
+- No Tumor
 
-Pituitary
+---
 
-No Tumor
+## 🎯 Objectives
 
-💡 Motivation
+- Accurately classify MRI scans into tumor types
+- Identify visual characteristics of each tumor class
+- Evaluate performance differences between CNN and k-NN
+- Understand which tumor type is most common in the dataset
 
-Assist in the early detection and classification of brain tumors.
+---
 
-Analyze key patterns and features of tumor types.
+## 📁 Dataset
 
-Improve understanding and accessibility of complex medical diagnoses.
+The dataset combines contributions from:
 
-Answer key questions:
+- Figshare
+- SARTAJ MRI dataset
+- Br35H dataset
 
-What characteristics are commonly found in each tumor type?
+Each MRI image is labeled into one of the four categories. The dataset was pre-split into training and testing sets and underwent preprocessing, including:
 
-What is the most common tumor type in the dataset?
+- Image resizing to reduce dimensionality
+- Conversion to NumPy arrays (`NumpyDataset`)
+- Batch shuffling and normalization
 
-📁 Dataset
+---
 
-Sourced from Figshare, SARTAJ, and Br35H datasets.
+## 📚 Related Work
 
-Total images: ~7,000 MRIs
+1. **BMC Medical Imaging (2024):** A hybrid deep CNN model for tumor classification with 93–99% accuracy  
+2. **Kaggle Contributor Notebook:** Used a pretrained CNN on the same dataset  
+3. **CSCI 4521 Coursework:** Provided base CNN architecture and data handling patterns
 
-Pre-labeled into 4 categories.
+---
 
-Already split into training and testing subsets.
+## 🔧 Models
 
-Preprocessing
-Images were resized to reduce dimensionality (pixel count).
+### 🧠 CNN
 
-Data loaded and structured using NumpyDataset for compatibility.
+CNNs are deep learning models ideal for medical image classification. This project uses a custom CNN architecture featuring:
 
-Feature normalization and batch shuffling applied.
+- Three convolutional layers with increasing channel depth
+- Two residual blocks to preserve features
+- Batch Normalization, ReLU activation, and MaxPooling
 
-📚 Related Work
+**Training Configuration:**
+- Epochs: `20`
+- Batch size: `100`
+- Optimizer: `Adam`
+- Learning rate: `0.0001`
 
-[Source 1: BMC Medical Imaging (2024)]
-A hybrid deep CNN approach achieving 93–99% accuracy on similar classification tasks.
+---
 
-[Source 2: Kaggle MRI Classification Notebook]
-A CNN-based notebook utilizing pretrained models on the same dataset.
+### 🔍 k-NN
 
-⚙️ Models
+Used as a baseline for comparison. Implemented via `sklearn.neighbors.KNeighborsClassifier`.
 
-1. Convolutional Neural Network (CNN)
-Deep learning model capable of extracting hierarchical spatial features from medical images.
+- Evaluated `k` values from `1` to `91` (step size = 3)
+- Selected best `k` based on test accuracy
+- Additional analysis on values: `k = 1, 3, 5, 7, 9`
 
-Architecture:
-Convolution + Pooling → Residual Block → Convolution + Pooling → Residual Block → Convolution + Pooling
+---
 
-Batch Normalization, ReLU activations, MaxPooling used throughout.
+## 📊 Results
 
-Trained for 20 epochs, with:
+- CNN:
+    - Testing Accuracy: 89.9%
+    - Training Accuracy: 94.3%
+- KNN:
+    - Testing Accuracy = 71.8% at k =3
+    - 
+- CNN significantly outperforms k-NN in both accuracy and runtime.
+- k-NN performance plateaus quickly and is unsuitable for large-scale image data.
 
-Batch Size: 100
+---
 
-Optimizer: Adam
+## 📈 Visualizations
 
-Learning Rate: 0.0001
+- CNN loss & accuracy graphs (initial and final)
+- ROC curve and confusion matrix (CNN)
+- k-NN accuracy vs. k-value plots
 
-2. k-Nearest Neighbors (KNN)
-A simple, non-parametric classification model used as a baseline.
+📂 Available in the `visuals/` directory.
 
-Implemented using sklearn.neighbors.
+---
 
-k-value tuned via testing accuracy from k = 1 to 91 (step 3).
+## ⚠️ Limitations
 
-Final selection based on accuracy plateau and runtime efficiency.
+- Only classifies four tumor types
+- Accuracy may not be sufficient for clinical use
+- Trained on limited datasets without real-time updates
 
-📊 Results
+**Future Improvements:**
+- Train on more diverse tumor categories
+- Explore transfer learning with ResNet or VGG
+- Add live inference or model deployment via web app
 
-📈 CNN Performance:
-Training Accuracy: 94.3%
-
-Testing Accuracy: 89.9%
-
-ROC Curve & Confusion Matrix provided in visualizations
-
-📉 KNN Performance:
-Best Test Accuracy: 71.77% (at k=3)
-
-Accuracy Range: 57% – 75%
-
-Much slower and less accurate than CNN
-
-📸 Visualizations
-
-Loss & Accuracy graphs (initial/final CNN)
-
-Tumor prediction samples
-
-KNN performance across varying k
-
-CNN Confusion Matrix & ROC Curve
-
-🧪 Limitations & Future Work
-
-Currently limited to 4 tumor types; real-world models should include more.
-
-Accuracy, while strong, is not on par with production-ready models used in hospitals.
-
-Future improvements:
-
-Larger datasets with broader tumor representation.
-
-Real-time model updating.
-
-Transfer learning with pretrained models like ResNet, VGG, or DenseNet.
-
-🔗 References
-Srinivasan et al. (2024). A hybrid deep CNN model for brain tumor image multi-classification. BMC Med Imaging. DOI link
-
-Brain Tumor MRI Classification on GitHub
+---
