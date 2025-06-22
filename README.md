@@ -15,6 +15,7 @@ Pituitary
 No Tumor
 
 💡 Motivation
+
 Assist in the early detection and classification of brain tumors.
 
 Analyze key patterns and features of tumor types.
@@ -28,6 +29,7 @@ What characteristics are commonly found in each tumor type?
 What is the most common tumor type in the dataset?
 
 📁 Dataset
+
 Sourced from Figshare, SARTAJ, and Br35H datasets.
 
 Total images: ~7,000 MRIs
@@ -44,6 +46,7 @@ Data loaded and structured using NumpyDataset for compatibility.
 Feature normalization and batch shuffling applied.
 
 📚 Related Work
+
 [Source 1: BMC Medical Imaging (2024)]
 A hybrid deep CNN approach achieving 93–99% accuracy on similar classification tasks.
 
@@ -51,6 +54,7 @@ A hybrid deep CNN approach achieving 93–99% accuracy on similar classification
 A CNN-based notebook utilizing pretrained models on the same dataset.
 
 ⚙️ Models
+
 1. Convolutional Neural Network (CNN)
 Deep learning model capable of extracting hierarchical spatial features from medical images.
 
@@ -77,6 +81,7 @@ k-value tuned via testing accuracy from k = 1 to 91 (step 3).
 Final selection based on accuracy plateau and runtime efficiency.
 
 📊 Results
+
 📈 CNN Performance:
 Training Accuracy: 94.3%
 
@@ -92,6 +97,7 @@ Accuracy Range: 57% – 75%
 Much slower and less accurate than CNN
 
 📸 Visualizations
+
 Loss & Accuracy graphs (initial/final CNN)
 
 Tumor prediction samples
@@ -101,6 +107,7 @@ KNN performance across varying k
 CNN Confusion Matrix & ROC Curve
 
 🧪 Limitations & Future Work
+
 Currently limited to 4 tumor types; real-world models should include more.
 
 Accuracy, while strong, is not on par with production-ready models used in hospitals.
